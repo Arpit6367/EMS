@@ -8,7 +8,9 @@ import {
   FaTachometerAlt,
   FaUsers,
 } from "react-icons/fa";
-const AdminSidebar = () => {
+import { useAuth } from "../../context/authContext";
+const Sidebar = () => {
+    const {user} = useAuth()
   return (
     <div className="bg-gray-800 text-white h-screen fixed left-0 top-0 botton-0 space-y-2 w-64">
       <div className="bg-teal-600 h-12 flex items-center justify-center">
@@ -16,7 +18,7 @@ const AdminSidebar = () => {
       </div>
       <div className="px-4">
         <NavLink
-          to="/admin-dashboard"
+          to="/employee-dashboard"
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-500" : ""
@@ -28,7 +30,7 @@ const AdminSidebar = () => {
           <span>DASHBOARD</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/employees"
+          to={`/employee-dashboard/profile/${user._id}`}
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-500" : ""
@@ -36,21 +38,10 @@ const AdminSidebar = () => {
           }
         >
           <FaUsers />
-          <span>EMPLOYEE</span>
+          <span>MY PROFILE</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/departments"
-          className={({ isActive }) =>
-            `${
-              isActive ? "bg-teal-500" : ""
-            } flex items-center space-x-4 py-2.5 px-4 rounded`
-          }
-        >
-          <FaBuilding />
-          <span>DEPARTMENTS</span>
-        </NavLink>
-        <NavLink
-          to="/admin-dashboard/leaves"
+          to={`/employee-dashboard/leaves/${user._id}`}
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-500" : ""
@@ -61,7 +52,7 @@ const AdminSidebar = () => {
           <span>LEAVES</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/salary/add"
+          to={`/employee-dashboard/salary/${user._id}`}
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-500" : ""
@@ -72,7 +63,7 @@ const AdminSidebar = () => {
           <span>SALARY</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/setting"
+          to="/employee-dashboard/setting"
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-500" : ""
@@ -87,4 +78,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default Sidebar;
